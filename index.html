@@ -7,7 +7,42 @@
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.0/howler.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/paperscript" canvas="main-layout">
-      // Paper script will go here.
+      var circleCollection = [];
+
+      function onKeyDown(event){
+        var x = randomNum(0, $(window).width());
+        var y = randomNum(0, $(window).height());
+        var circle = Path.Circle(new Point(x, y), 250)
+        circle.fillColor = getRandomColor();
+        circleCollection.push(circle);
+        console.log(circleCollection);
+      }
+
+      function onFrame(event){
+        for(var i=0; i<circleCollection.length; i++){
+          var circle = circleCollection[i];
+          if(circle.area < 1){
+            circleCollection.splice(i, 1);
+          }else{
+            circle.scale(0.9);
+          }
+          circle.hue += 1;
+        }
+      }
+
+      function randomNum(start, end){
+        return Math.random() * (end - start) + start;
+      }
+
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
     </script>
   </head>
   <body>
