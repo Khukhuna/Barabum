@@ -40,7 +40,7 @@
       function onKeyDown(event){
         var x = randomNum(0, $(window).width());
         var y = randomNum(0, $(window).height());
-        var circle = Path.Circle(new Point(x, y), 250)
+        var circle = Path.Circle(new Point(x, y), 400)
         circle.fillColor = getRandomColor();
         circleCollection.push(circle);
         keyData[event.key]['sound'].play();
